@@ -1,0 +1,46 @@
+
+MariaDB [(none)]> USE dbpos_sib6
+Database changed
+MariaDB [dbpos_sib6]> SELECT SUM(stok - min_stok) as selisih from produk;
++---------+
+| selisih |
++---------+
+|      91 |
++---------+
+1 row in set (0.063 sec)
+
+MariaDB [dbpos_sib6]> SELECT sum(stok) as total_asset from produk;
++-------------+
+| total_asset |
++-------------+
+|         193 |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [dbpos_sib6]> SELECT * FROM pelanggan WHERE YEAR(tgl_lahir) BETWEEN 1999 AND 2004;
+Empty set (0.007 sec)
+
+MariaDB [dbpos_sib6]> SELECT * FROM pelanggan WHERE YEAR(tgl_lahir)=1998;
+Empty set (0.001 sec)
+
+MariaDB [dbpos_sib6]> SELECT * FROM pelanggan WHERE MONTH(tgl_lahir)=08;
+Empty set (0.000 sec)
+
+MariaDB [dbpos_sib6]> SELECT nama, tmp_lahir, tgl_lahir, (YEAR(NOW())-YEAR(tgl_lahir)) AS umur FROM pelanggan;
++--------------------+------------+------------+------+
+| nama               | tmp_lahir  | tgl_lahir  | umur |
++--------------------+------------+------------+------+
+| Agung Sedayu Group | Solo       | 2010-01-01 |   14 |
+| Pandan Wangi       | Yogyakarta | 1950-01-01 |   74 |
+| Sekar Mirah        | Kediri     | 1983-02-20 |   41 |
+| Swandaru Geni      | Kediri     | 1981-01-04 |   43 |
+| Pradabashu         | Pati       | 1985-04-02 |   39 |
+| Gayatri Dwi        | Jakarta    | 1987-11-28 |   37 |
+| Dewi Gyat          | Jakarta    | 1988-12-01 |   36 |
+| Andre Haru         | Surabaya   | 1990-07-15 |   34 |
+| Ahmad Hasan        | Surabaya   | 1992-10-15 |   32 |
+| Cassanndra         | Belfast    | 1990-11-20 |   34 |
+| Andi Wijaya        | Tangerang  | 2023-11-07 |    1 |
+| Ira                | Jakarta    | 2023-11-07 |    1 |
++--------------------+------------+------------+------+
+12 rows in set (0.000 sec)

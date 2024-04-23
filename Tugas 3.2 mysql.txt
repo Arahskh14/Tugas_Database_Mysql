@@ -1,0 +1,96 @@
+
+1. Berapa jumlah pelanggan yang tahun lahirnya 1998
+MariaDB [dbpos_sib6]> SELECT COUNT(*) AS jumlah_pelanggan FROM pelanggan WHERE YEAR(tgl_lahir) = 1998;
++------------------+
+| jumlah_pelanggan |
++------------------+
+|                0 |
++------------------+
+1 row in set (0.006 sec)
+
+MariaDB [dbpos_sib6]> DESC pelanggan;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int(11)     | NO   | PRI | NULL    | auto_increment |
+| kode      | varchar(10) | NO   | UNI | NULL    |
+  |
+| nama      | varchar(45) | NO   | MUL | NULL    |
+  |
+| jk        | char(1)     | NO   |     | NULL    |
+  |
+| tmp_lahir | varchar(30) | YES  |     | NULL    |
+  |
+| tgl_lahir | date        | YES  | MUL | NULL    |
+  |
+| email     | varchar(45) | YES  |     | NULL    |
+  |
+| kartu_id  | int(11)     | NO   | MUL | NULL    |
+  |
++-----------+-------------+------+-----+---------+----------------+
+8 rows in set (0.026 sec)
+
+2. Berapa jumlah pelanggan perempuan yang tempat lahirnya di Jakarta
+MariaDB [dbpos_sib6]> SELECT COUNT(*) AS jumlah_pelanggan_perempuan
+    -> FROM pelanggan
+    -> WHERE jk = 'P' AND tmp_lahir = 'Jakarta';
++----------------------------+
+| jumlah_pelanggan_perempuan |
++----------------------------+
+|                          3 |
++----------------------------+
+1 row in set (0.006 sec)
+
+3. Berapa jumlah total stok semua produk yang harga jualnya dibawah 10rb
+MariaDB [dbpos_sib6]> SELECT SUM(stok) AS total_stok FROM produk WHERE harga_jual < 10000;
++------------+
+| total_stok |
++------------+
+|         79 |
++------------+
+1 row in set (0.001 sec)
+
+4. Ada berapa produk yang mempunyai kode awal K
+MariaDB [dbpos_sib6]> SELECT COUNT(*) AS jumlah_produk_k FROM produk WHERE kode LIKE 'K%';
++-----------------+
+| jumlah_produk_k |
++-----------------+
+|               1 |
++-----------------+
+1 row in set (0.001 sec)
+
+5. Berapa harga jual rata-rata produk yang diatas 1jt
+MariaDB [dbpos_sib6]> SELECT AVG(harga_jual) AS harga_jual_rata_rata FROM produk WHERE harga_jual > 1000000;
++----------------------+
+| harga_jual_rata_rata |
++----------------------+
+|   31387733.333333332 |
++----------------------+
+1 row in set (0.001 sec)
+
+6. Tampilkan jumlah stok yang paling besar
+MariaDB [dbpos_sib6]> SELECT MAX(stok) AS jumlah_stok_terbesar FROM produk;
++----------------------+
+| jumlah_stok_terbesar |
++----------------------+
+|                   53 |
++----------------------+
+1 row in set (0.000 sec)
+
+7. Ada berapa produk yang stoknya kurang dari minimal stok
+MariaDB [dbpos_sib6]> SELECT COUNT(*) AS jumlah_produk_kurang_stok FROM produk WHERE stok < 10;
++---------------------------+
+| jumlah_produk_kurang_stok |
++---------------------------+
+|                        16 |
++---------------------------+
+1 row in set (0.001 sec)
+
+8. Berapa total asset dari keseluruhan produk
+MariaDB [dbpos_sib6]> SELECT SUM(harga_beli * stok) AS total_asset FROM produk;
++-------------+
+| total_asset |
++-------------+
+|   480504000 |
++-------------+
+1 row in set (0.001 sec)
